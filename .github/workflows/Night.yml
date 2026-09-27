@@ -1,4 +1,4 @@
-name: Nightly
+name: Night
 
 on:
   schedule:
@@ -19,7 +19,7 @@ jobs:
       - name: Run pipeline
         env:
           GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
-        run: python nightly_pipeline.py
+        run: python updatnigh.py
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
