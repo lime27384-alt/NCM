@@ -7,7 +7,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 import joblib
 
-G_Api = os.environ["GUARDIAN_API_KEY"]
+G_Api = os.environ["G_API"]
 TC = 250
 PH_TC = 70
 PHF = [
