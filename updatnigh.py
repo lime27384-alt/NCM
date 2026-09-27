@@ -7,7 +7,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 import joblib
 
-G_Api = os.environ["G_API"]
+G_Api = os.environ.get("G_API")
+if not G_Api:
+    raise RuntimeError("Missing G_API secret in environment")
+    
 TC = 250
 PH_TC = 70
 PHF = [
