@@ -19,8 +19,6 @@ jobs:
       - name: Run pipeline
         env:
           G_API: ${{ secrets.G_API }}
-          if not G_Api:
-            raise RuntimeError("Missing G_API secret in environment")
         run: python updatnigh.py
       - name: Commit and push
         run: |
