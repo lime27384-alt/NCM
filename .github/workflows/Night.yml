@@ -24,6 +24,11 @@ jobs:
           G_API: ${{ secrets.G_API }}
         run: python updatnigh.py
 
+      - name: Check secret availability
+        run: |
+          echo "G_API set? ${G_API:+yes}${G_API:-no}"
+          env | grep -E 'G_API|GUARDIAN_API_KEY' || true
+
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
