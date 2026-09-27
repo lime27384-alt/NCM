@@ -18,8 +18,9 @@ jobs:
       - run: pip install requests scikit-learn joblib
       - name: Run pipeline
         env:
-          GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
           G_API: ${{ secrets.G_API }}
+          if not G_Api:
+            raise RuntimeError("Missing G_API secret in environment")
         run: python updatnigh.py
       - name: Commit and push
         run: |
