@@ -1,0 +1,29 @@
+name: Nightly
+
+on:
+  schedule:
+    - cron: '0 19 * * *'  
+  workflow_dispatch:        
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests scikit-learn joblib
+      - name: Run pipeline
+        env:
+          GUARDIAN_API_KEY: ${{ secrets.GUARDIAN_API_KEY }}
+        run: python nightly_pipeline.py
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add model.pkl vectorizer.pkl model_ph.pkl vectorizer_ph.pkl version.txt
+          git diff --staged --quiet || git commit -m "Nightly refresh $(date -u +%Y%m%d%H%M%S)"
+          git push
