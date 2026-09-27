@@ -18,7 +18,7 @@ jobs:
       - run: pip install requests scikit-learn joblib
       - name: Run pipeline
         env:
-          G_API: ${{ secrets.G_API }}
+          G_API: ${{ secrets.G_API}}
         run: python updatnigh.py
       - name: Commit and push
         run: |
